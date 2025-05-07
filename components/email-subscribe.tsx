@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Mail, CheckCircle, Loader2, MailIcon } from "lucide-react";
+import { CheckCircle, Loader2, MailIcon } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function EmailSubscribe() {

@@ -3,8 +3,6 @@ import { useState } from "react";
 import { Zap, Wifi, CircleParking, Power } from "lucide-react";
 
 export default function AmenitiesSection() {
-  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
-
   const amenities = [
     {
       icon: <Zap className="h-6 w-6" />,
@@ -59,8 +57,6 @@ export default function AmenitiesSection() {
             <div
               key={index}
               className="group flex flex-col items-center bg-background/70 rounded-xl p-6 text-center transition-all duration-300 hover:bg-background hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 border border-transparent hover:border-primary/10"
-              onMouseEnter={() => setHoveredItem(index)}
-              onMouseLeave={() => setHoveredItem(null)}
             >
               <div className="p-4 rounded-full bg-gradient-to-br from-primary/10 to-red-500/10 mb-4 group-hover:bg-gradient-to-br group-hover:from-primary/20 group-hover:to-red-500/20 transition-colors duration-300">
                 <div className="text-primary group-hover:text-primary/90 transition-all duration-300">
