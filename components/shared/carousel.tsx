@@ -1,12 +1,13 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import {
   motion,
   useMotionValue,
   useTransform,
   AnimatePresence,
 } from "framer-motion";
-import type { PanInfo, AnimationProps } from "framer-motion";
+import type { PanInfo, AnimationProps, MotionValue } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 export interface CarouselItem {
   image: string;
@@ -28,6 +29,7 @@ export interface CarouselProps {
   height?: string;
 }
 
+// Constants
 const DEFAULT_ITEMS: CarouselItem[] = [
   {
     id: 1,
@@ -63,6 +65,74 @@ const DRAG_BUFFER = 50;
 const VELOCITY_THRESHOLD = 500;
 const GAP = 16;
 const SPRING_OPTIONS = { type: "spring", stiffness: 300, damping: 30 } as const;
+
+// Item component that uses hooks
+function CarouselItemComponent({
+  item,
+  index,
+  currentIndex,
+  trackItemOffset,
+  x,
+  itemWidth,
+  round,
+  isResetting,
+}: {
+  item: CarouselItem;
+  index: number;
+  currentIndex: number;
+  trackItemOffset: number;
+  x: MotionValue<number>;
+  itemWidth: number;
+  round: boolean;
+  isResetting: boolean;
+}) {
+  // Now each hook is called directly in the component function
+  const range = [
+    -(index + 1) * trackItemOffset,
+    -index * trackItemOffset,
+    -(index - 1) * trackItemOffset,
+  ];
+  const rotateY = useTransform(x, range, round ? [60, 0, -60] : [15, 0, -15]);
+  const scale = useTransform(x, range, [0.8, 1, 0.8]);
+  const opacity = useTransform(x, range, [0.5, 1, 0.5]);
+
+  return (
+    <motion.div
+      key={`item-${item.id}-${index}`}
+      className={`relative shrink-0 ${
+        round ? "rounded-full overflow-hidden" : "rounded-xl overflow-hidden"
+      } h-full shadow-2xl cursor-grab active:cursor-grabbing`}
+      style={{
+        width: itemWidth,
+        rotateY,
+        scale,
+        opacity,
+        zIndex: index === currentIndex ? 10 : 1,
+        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
+      }}
+      transition={
+        isResetting
+          ? { duration: 0 }
+          : (SPRING_OPTIONS as AnimationProps["transition"])
+      }
+    >
+      <div className="w-full h-full relative">
+        <Image
+          fill
+          src={item.image}
+          alt={item.alt}
+          className="w-full h-full object-cover"
+        />
+        {(item.title || item.description) && (
+          <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-4">
+            {item.title && <h3 className="text-lg font-bold">{item.title}</h3>}
+            {item.description && <p className="text-sm">{item.description}</p>}
+          </div>
+        )}
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Carousel({
   items = DEFAULT_ITEMS,
@@ -127,6 +197,21 @@ export default function Carousel({
     }
   }, [pauseOnHover]);
 
+  const goToNext = useCallback(() => {
+    if (isAnimating) return;
+
+    setIsAnimating(true);
+    setCurrentIndex((prev) => {
+      if (prev === items.length - 1 && loop) {
+        return prev + 1; // Animate to clone.
+      }
+      if (prev === carouselItems.length - 1) {
+        return loop ? 0 : prev;
+      }
+      return prev + 1;
+    });
+  }, [isAnimating, items.length, loop, carouselItems.length]);
+
   useEffect(() => {
     if (autoplay && (!pauseOnHover || !isHovered) && !isAnimating) {
       const timer = setInterval(() => {
@@ -141,22 +226,8 @@ export default function Carousel({
     isAnimating,
     currentIndex,
     pauseOnHover,
+    goToNext,
   ]);
-
-  const goToNext = () => {
-    if (isAnimating) return;
-
-    setIsAnimating(true);
-    setCurrentIndex((prev) => {
-      if (prev === items.length - 1 && loop) {
-        return prev + 1; // Animate to clone.
-      }
-      if (prev === carouselItems.length - 1) {
-        return loop ? 0 : prev;
-      }
-      return prev + 1;
-    });
-  };
 
   const goToPrevious = () => {
     if (isAnimating) return;
@@ -170,8 +241,6 @@ export default function Carousel({
       }
     });
   };
-
-  const effectiveTransition = isResetting ? { duration: 0 } : SPRING_OPTIONS;
 
   const handleAnimationComplete = () => {
     setIsAnimating(false);
@@ -250,73 +319,26 @@ export default function Carousel({
         }}
         onDragEnd={handleDragEnd}
         animate={{ x: -(currentIndex * trackItemOffset) }}
-        transition={effectiveTransition as AnimationProps["transition"]}
+        transition={
+          isResetting
+            ? { duration: 0 }
+            : (SPRING_OPTIONS as AnimationProps["transition"])
+        }
         onAnimationComplete={handleAnimationComplete}
       >
-        {carouselItems.map((item, index) => {
-          const range = [
-            -(index + 1) * trackItemOffset,
-            -index * trackItemOffset,
-            -(index - 1) * trackItemOffset,
-          ];
-          const outputRange = round ? [60, 0, -60] : [15, 0, -15];
-          const rotateY = useTransform(x, range, outputRange, { clamp: false });
-          const scale = useTransform(x, range, [0.8, 1, 0.8], { clamp: false });
-          const opacity = useTransform(x, range, [0.5, 1, 0.5], {
-            clamp: false,
-          });
-
-          return (
-            <motion.div
-              key={`item-${item.id}-${index}`}
-              className={`relative shrink-0 ${
-                round
-                  ? "rounded-full overflow-hidden"
-                  : "rounded-xl overflow-hidden"
-              } h-full shadow-2xl cursor-grab active:cursor-grabbing`}
-              style={{
-                width: itemWidth,
-                rotateY,
-                scale,
-                opacity,
-                zIndex: index === currentIndex ? 10 : 1,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
-              }}
-              transition={effectiveTransition as AnimationProps["transition"]}
-            >
-              <div className="relative w-full h-full overflow-hidden">
-                <div
-                  className="w-full h-full bg-cover bg-center transition-transform duration-700"
-                  style={{
-                    backgroundImage: `url(${item.image})`,
-                    transform:
-                      isHovered && index === currentIndex % items.length
-                        ? "scale(1.05)"
-                        : "scale(1)",
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-
-                <motion.div
-                  className="absolute inset-x-0 bottom-0 p-6 text-white"
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{
-                    y: index === currentIndex % items.length ? 0 : 20,
-                    opacity: index === currentIndex % items.length ? 1 : 0,
-                  }}
-                  transition={{ delay: 0.2, duration: 0.5 }}
-                >
-                  <h3 className="text-2xl font-bold mb-2">
-                    {item.title || `Image ${index + 1}`}
-                  </h3>
-                  <p className="text-sm text-gray-300">
-                    {item.description || item.alt}
-                  </p>
-                </motion.div>
-              </div>
-            </motion.div>
-          );
-        })}
+        {carouselItems.map((item, index) => (
+          <CarouselItemComponent
+            key={`carousel-item-${item.id}-${index}`}
+            item={item}
+            index={index}
+            currentIndex={currentIndex}
+            trackItemOffset={trackItemOffset}
+            x={x}
+            itemWidth={itemWidth}
+            round={round}
+            isResetting={isResetting}
+          />
+        ))}
       </motion.div>
 
       {/* Navigation Arrows */}
@@ -371,7 +393,7 @@ export default function Carousel({
             >
               {currentIndex % items.length === index && (
                 <motion.div
-                  className="absolute inset-0 bg-white"
+                  className="absolute  inset-0 bg-white"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}

@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { Zap, Wifi, CircleParking, Power } from "lucide-react";
 
 export default function AmenitiesSection() {

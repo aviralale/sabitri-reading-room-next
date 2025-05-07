@@ -47,7 +47,7 @@ export default function EmailSubscribe() {
         >
           <CheckCircle className="h-5 w-5" />
           <p className="text-sm font-medium">
-            Thank you! You're now subscribed.
+            Thank you! You&apos;re now subscribed.
           </p>
         </motion.div>
       ) : (
