@@ -22,10 +22,11 @@ const Navbar = () => {
   }, []);
 
   const menuItems = [
-    { name: "About", href: "#about" },
-    { name: "Facilities", href: "#facilities" },
-    { name: "Membership", href: "#membership" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Facilities", href: "/facilities" },
+    { name: "Membership", href: "/membership" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const closeMenu = () => setMenuState(false);

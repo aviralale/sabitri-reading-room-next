@@ -3,11 +3,11 @@ import Link from "next/link";
 import Logo from "@/assets/images/logo.png";
 
 const links = [
-  { title: "About", href: "#" },
-  { title: "Facilities", href: "#" },
-  { title: "Membership", href: "#" },
-  { title: "Contact", href: "#" },
-  { title: "Help", href: "#" },
+  { title: "About", href: "/about" },
+  { title: "Facilities", href: "/facilities" },
+  { title: "Membership", href: "/membership" },
+  { title: "Contact", href: "/contact" },
+  { title: "Help", href: "/help" },
 ];
 
 const socialLinks = [

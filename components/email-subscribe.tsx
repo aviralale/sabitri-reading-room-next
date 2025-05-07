@@ -56,10 +56,7 @@ export default function EmailSubscribe() {
           className="flex max-w-md mx-auto md:mx-0 relative group"
         >
           <div className="relative flex-grow">
-            <MailIcon
-              className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 transition-colors group-hover:text-primary/70"
-              aria-hidden="true"
-            />
+            <MailIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 transition-colors group-hover:text-primary/70" />
             <input
               placeholder="Your email address"
               className="h-12 w-full rounded-l-lg border border-primary/20 border-r-0 bg-background/50 backdrop-blur-sm pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all peer"

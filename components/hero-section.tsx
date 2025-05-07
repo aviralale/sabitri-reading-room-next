@@ -141,7 +141,7 @@ export default function HeroSection() {
       </div>
 
       <section className="relative" id="hero">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 pt-20 pb-24 lg:pt-24 lg:pb-32">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6  pb-24  lg:pb-32">
           {/* Hero Content + Carousel */}
           <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-16">
             {/* Content area with improved animations */}

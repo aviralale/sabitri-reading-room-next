@@ -57,7 +57,7 @@ export default function RootLayout({
           <div className="fixed w-full z-[1000] bg-white/80 dark:bg-black/80">
             <Navbar />
           </div>
-          {children}
+          <main className="pt-32">{children}</main>
           <FooterSection />
         </ThemeProvider>
       </body>
