@@ -21,7 +21,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-
+import { handleContact } from "@/api";
 interface FormData {
   name: string;
   email: string;
@@ -29,26 +29,6 @@ interface FormData {
   subject: string;
   message: string;
 }
-// Simulate API call
-const simulateApiCall = (): Promise<{ success: boolean; message: string }> => {
-  return new Promise((resolve, reject) => {
-    // Simulate network delay
-    setTimeout(() => {
-      // 90% chance of success
-      if (Math.random() > 0.1) {
-        resolve({
-          success: true,
-          message: "Your message has been sent successfully!",
-        });
-      } else {
-        reject({
-          success: false,
-          message: "There was an error sending your message. Please try again.",
-        });
-      }
-    }, 2000); // 2 second delay to simulate network
-  });
-};
 
 export default function ContactSection() {
   const [formData, setFormData] = useState<FormData>({
@@ -127,13 +107,13 @@ export default function ContactSection() {
   const handleChange = (e: FormEvent) => {
     const { id, value } = e.target as HTMLInputElement | HTMLTextAreaElement;
     setFormData((prev) => ({ ...prev, [id]: value }));
-    setFormData((prev) => ({ ...prev, [id]: value }));
 
     // Clear error when user starts typing
     if (errors[id as ErrorKeys]) {
       setErrors((prev) => ({ ...prev, [id]: "" }));
     }
   };
+
   const resetForm = () => {
     setFormData({
       name: "",
@@ -168,28 +148,42 @@ export default function ContactSection() {
     });
 
     try {
-      // Simulate API call
-      const response = await simulateApiCall();
+      // Prepare contact data object according to the Contact interface
+      const contactData = {
+        name: formData.name,
+        email_address: formData.email,
+        phone_number: formData.phone || "", // Handle empty phone
+        subject: formData.subject,
+        message: formData.message,
+        created_at: new Date().toISOString(), // Set current timestamp
+      };
 
-      // Show success state
-      setFormState({
-        isSubmitting: false,
-        isSuccess: true,
-        isError: false,
-        message: response.message,
-      });
+      // Call the API handler function
+      const success = await handleContact(contactData);
 
-      // Reset form after successful submission
-      resetForm();
+      if (success) {
+        // Show success state
+        setFormState({
+          isSubmitting: false,
+          isSuccess: true,
+          isError: false,
+          message: "Your message has been sent successfully!",
+        });
 
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setFormState((prev) => ({
-          ...prev,
-          isSuccess: false,
-          message: "",
-        }));
-      }, 5000);
+        // Reset form after successful submission
+        resetForm();
+
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setFormState((prev) => ({
+            ...prev,
+            isSuccess: false,
+            message: "",
+          }));
+        }, 5000);
+      } else {
+        throw new Error("Failed to submit the contact form");
+      }
     } catch (error: unknown) {
       let errorMessage = "An unknown error occurred";
       if (error instanceof Error) {

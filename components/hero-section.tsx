@@ -8,6 +8,7 @@ import FeatureCard from "./feature-card";
 import AmenitiesSection from "./amenities";
 import CTABanner from "./cta-banner";
 import CarouselSection from "./carousel-section";
+import { heroFeatures, stats } from "@/app/data";
 
 export default function HeroSection() {
   const [animateStats, setAnimateStats] = useState<boolean>(false);
@@ -49,45 +50,6 @@ export default function HeroSection() {
       clearTimeout(timer);
     };
   }, []);
-
-  const stats = [
-    { value: "7", label: "Days a Week", icon: "Calendar" },
-    { value: "6AM - 9PM", label: "Access Available", icon: "Clock" },
-    { value: "FREE", label: "Internet Access", icon: "Wifi" },
-  ];
-
-  const features = [
-    {
-      icon: "Award",
-      title: "Personal Study Desks",
-      description:
-        "Private workspace tailored for concentrated study sessions with ergonomic chairs for comfort.",
-      color: "text-primary",
-      link: "#personal-desks",
-      bgColor: "bg-primary/5",
-      borderColor: "border-primary/20",
-    },
-    {
-      icon: "Shield",
-      title: "Distraction-Free Zone",
-      description:
-        "Peaceful environment with sound insulation and strict noise control policies for deep focus.",
-      color: "text-purple-600",
-      link: "#distraction-free",
-      bgColor: "bg-purple-600/5",
-      borderColor: "border-purple-600/20",
-    },
-    {
-      icon: "Clock",
-      title: "Flexible Hours",
-      description:
-        "Extended opening times from 6 AM to 9 PM access options available for dedicated readers.",
-      color: "text-pink-500",
-      link: "#flexible-hours",
-      bgColor: "bg-pink-500/5",
-      borderColor: "border-pink-500/20",
-    },
-  ];
 
   // Scroll to element function
   const scrollToElement = (id: string) => {
@@ -184,6 +146,7 @@ export default function HeroSection() {
                 <Button
                   size="lg"
                   className="w-full sm:w-auto group relative overflow-hidden bg-gradient-to-r from-primary to-red-500/80 hover:from-primary/90 hover:to-red-500/70 transition-all duration-300 shadow-md hover:shadow-lg"
+                  onClick={() => (window.location.href = "/membership")}
                 >
                   <span className="relative z-10 flex items-center">
                     Reserve Your Desk
@@ -216,7 +179,7 @@ export default function HeroSection() {
             id="features"
             className="mt-32 grid grid-cols-1 gap-8 md:grid-cols-3"
           >
-            {features.map((feature, index) => (
+            {heroFeatures.map((feature, index) => (
               <div
                 key={index}
                 className="transform transition-all duration-500 hover:-translate-y-1 "

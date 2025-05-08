@@ -1,33 +1,8 @@
 "use client";
-import { Zap, Wifi, CircleParking, Power } from "lucide-react";
+
+import { amenities } from "@/app/data";
 
 export default function AmenitiesSection() {
-  const amenities = [
-    {
-      icon: <Zap className="h-6 w-6" />,
-      label: "Personal Desk with Power Socket",
-      description:
-        "Dedicated workspace with multiple outlets for all your devices",
-    },
-    {
-      icon: <Wifi className="h-6 w-6" />,
-      label: "High-Speed WiFi",
-      description:
-        "Ultra-fast, secure internet connection for seamless productivity",
-    },
-    {
-      icon: <CircleParking className="h-6 w-6" />,
-      label: "Ample Parking Space",
-      description: "Convenient on-site parking available for all members",
-    },
-    {
-      icon: <Power className="h-6 w-6" />,
-      label: "Power Backup",
-      description:
-        "Uninterrupted power supply for 24/7 operational reliability",
-    },
-  ];
-
   return (
     <div className="mt-24 relative">
       {/* Background decorative elements */}

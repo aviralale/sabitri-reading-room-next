@@ -101,7 +101,7 @@ const Navbar = () => {
                 size="sm"
                 className="bg-gradient-to-r from-red-500 to-blue-500 px-5 font-medium text-white shadow-md transition-all duration-300 hover:from-red-600 hover:to-blue-600 hover:shadow-lg dark:shadow-blue-500/20"
               >
-                <Link href="#membership">Book Now</Link>
+                <Link href="/membership">Book Now</Link>
               </Button>
             </div>
           </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { Testimonial } from "@/types";
 import {
   IconArrowLeft,
   IconArrowRight,
@@ -10,15 +11,6 @@ import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { useSwipeable } from "react-swipeable";
-
-type Testimonial = {
-  quote: string;
-  name: string;
-  designation: string;
-  src: string;
-  rating?: number; // Optional rating out of 5
-  alt?: string;
-};
 
 export const AnimatedTestimonials = ({
   testimonials,
@@ -175,11 +167,8 @@ export const AnimatedTestimonials = ({
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-blue-500/20 dark:from-indigo-400/20 dark:to-blue-400/20 rounded-3xl p-1">
                   <div className="relative w-full h-full overflow-hidden rounded-2xl">
                     <Image
-                      src={testimonial.src}
-                      alt={
-                        testimonial.alt ||
-                        `${testimonial.name}, ${testimonial.designation}`
-                      }
+                      src={testimonial.image}
+                      alt={`${testimonial.name}, ${testimonial.designation}`}
                       width={500}
                       height={500}
                       loading="lazy"
@@ -205,23 +194,6 @@ export const AnimatedTestimonials = ({
                         <p className="text-sm text-white/70">
                           {testimonial.designation}
                         </p>
-
-                        {/* Show rating if available */}
-                        {testimonial.rating && (
-                          <div className="flex gap-1 mt-2">
-                            {[...Array(5)].map((_, i) => (
-                              <IconStar
-                                key={i}
-                                size={16}
-                                className={`${
-                                  i < testimonial.rating!
-                                    ? "text-yellow-400 fill-yellow-400"
-                                    : "text-gray-400"
-                                }`}
-                              />
-                            ))}
-                          </div>
-                        )}
                       </motion.div>
                     )}
                   </div>
@@ -268,29 +240,31 @@ export const AnimatedTestimonials = ({
                 aria-live="polite"
               >
                 <motion.div className="relative">
-                  {testimonials[active].quote.split(" ").map((word, index) => (
-                    <motion.span
-                      key={index}
-                      initial={{
-                        filter: "blur(8px)",
-                        opacity: 0,
-                        y: 10,
-                      }}
-                      animate={{
-                        filter: "blur(0px)",
-                        opacity: 1,
-                        y: 0,
-                      }}
-                      transition={{
-                        duration: 0.3,
-                        ease: "easeOut",
-                        delay: 0.015 * index,
-                      }}
-                      className="inline-block"
-                    >
-                      {word}&nbsp;
-                    </motion.span>
-                  ))}
+                  {testimonials[active].message
+                    .split(" ")
+                    .map((word, index) => (
+                      <motion.span
+                        key={index}
+                        initial={{
+                          filter: "blur(8px)",
+                          opacity: 0,
+                          y: 10,
+                        }}
+                        animate={{
+                          filter: "blur(0px)",
+                          opacity: 1,
+                          y: 0,
+                        }}
+                        transition={{
+                          duration: 0.3,
+                          ease: "easeOut",
+                          delay: 0.015 * index,
+                        }}
+                        className="inline-block"
+                      >
+                        {word}&nbsp;
+                      </motion.span>
+                    ))}
                 </motion.div>
               </motion.blockquote>
 

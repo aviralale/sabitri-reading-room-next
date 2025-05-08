@@ -1,9 +1,9 @@
 "use client";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Loader2, MailIcon } from "lucide-react";
 import { motion } from "framer-motion";
+import { handleSubscribe } from "@/api";
 
 export default function EmailSubscribe() {
   const [email, setEmail] = useState("");
@@ -15,14 +15,25 @@ export default function EmailSubscribe() {
     if (!email || !email.includes("@")) return;
 
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsSubmitting(false);
-    setSubscribed(true);
-    setEmail("");
 
-    // Reset success message after 3 seconds
-    setTimeout(() => setSubscribed(false), 3000);
+    try {
+      const success = await handleSubscribe(email);
+
+      if (success) {
+        setSubscribed(true);
+        setEmail("");
+        // Reset success message after 3 seconds
+        setTimeout(() => setSubscribed(false), 3000);
+      } else {
+        // Optional: Handle failed subscription
+        console.error("Failed to subscribe");
+        // You could set an error state here if needed
+      }
+    } catch (error) {
+      console.error("Error in subscription process:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -38,7 +49,6 @@ export default function EmailSubscribe() {
           Receive more details directly to your mail
         </p>
       </div>
-
       {subscribed ? (
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -47,7 +57,7 @@ export default function EmailSubscribe() {
         >
           <CheckCircle className="h-5 w-5" />
           <p className="text-sm font-medium">
-            Thank you! You&apos;re now subscribed.
+            Thank you! You&apos;ll receive a mail soon.
           </p>
         </motion.div>
       ) : (
@@ -68,7 +78,6 @@ export default function EmailSubscribe() {
               disabled={isSubmitting}
             />
           </div>
-
           <Button
             type="submit"
             className="rounded-l-none h-12 px-6 bg-gradient-to-r from-primary to-red-500/80 transition-all relative overflow-hidden disabled:opacity-80"
@@ -86,9 +95,6 @@ export default function EmailSubscribe() {
               </>
             )}
           </Button>
-
-          {/* Animated border effect on hover */}
-          {/* <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-red-500 rounded-lg opacity-0 group-hover:opacity-30 blur-sm transition-opacity -z-10" /> */}
         </form>
       )}
     </motion.div>

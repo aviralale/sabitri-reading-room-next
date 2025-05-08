@@ -17,6 +17,8 @@ import {
   Star,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import AboutImg from "@/assets/images/about.jpg";
 
 export default function AboutPage() {
   const [animateStats, setAnimateStats] = useState(false);
@@ -232,7 +234,7 @@ export default function AboutPage() {
               <div className="relative rounded-2xl overflow-hidden shadow-xl transform transition-all duration-500 hover:scale-[1.02]">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20 z-10"></div>
                 <Image
-                  src="https://images.unsplash.com/photo-1730047614287-65e28e013ce1"
+                  src={AboutImg}
                   alt="Students studying at Sabitri Reading Room"
                   className="w-full h-auto object-cover"
                 />
@@ -467,10 +469,13 @@ export default function AboutPage() {
                   preparation—one uninterrupted study session at a time.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
-                  <button className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-md font-medium transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center">
+                  <Link
+                    href="/membership"
+                    className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-md font-medium transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center"
+                  >
                     Reserve Your Desk Now
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </button>
+                  </Link>
                   <button className="bg-transparent border border-white text-white hover:bg-white/10 px-8 py-3 rounded-md font-medium transition-all duration-300">
                     Learn About Pricing
                   </button>

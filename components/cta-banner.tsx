@@ -48,6 +48,7 @@ export default function CTABanner() {
             className={`bg-white text-black hover:bg-white/90 shadow-lg hover:shadow-xl px-3 py-3 h-auto text-base font-semibold transition-all duration-300 ease-in-out ${
               isHovered ? "scale-105" : "scale-100"
             } rounded-xl`}
+            onClick={() => (window.location.href = "/membership")}
           >
             Book Your First Session
             <ArrowRight className="ml-2 h-5 w-5" />

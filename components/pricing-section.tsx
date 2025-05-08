@@ -1,14 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import {
-  Check,
-  BookOpen,
-  Star,
-  Clock,
-  Calendar,
-  Award,
-  Bookmark,
-} from "lucide-react";
+import { Check, BookOpen } from "lucide-react";
+import { pricingPlans } from "@/app/data";
 
 const PricingSection = () => {
   const [selectedPlan, setSelectedPlan] = useState("Monthly");
@@ -17,101 +10,6 @@ const PricingSection = () => {
   useEffect(() => {
     setIsAnimated(true);
   }, []);
-
-  const pricingPlans = [
-    {
-      name: "Daily",
-      price: "200",
-      duration: "Per Day",
-      icon: <Clock size={22} />,
-      color: "bg-blue-100 text-blue-600",
-      hoverColor: "hover:bg-blue-100",
-      borderColor: "border-blue-200",
-      buttonColor: "bg-blue-600 hover:bg-blue-700",
-      description: "Perfect for one-time visits",
-      features: [
-        "Full access to reading materials",
-        "Quiet study environment",
-        "Basic amenities included",
-        "No commitment required",
-      ],
-    },
-    {
-      name: "Weekly",
-      price: "1,000",
-      duration: "Per Week",
-      icon: <Calendar size={22} />,
-      color: "bg-purple-100 text-purple-600",
-      hoverColor: "hover:bg-purple-100",
-      borderColor: "border-purple-200",
-      buttonColor: "bg-purple-600 hover:bg-purple-700",
-      description: "Great for short-term projects",
-      features: [
-        "All daily benefits included",
-        "Reserved seating options",
-        "Weekly events participation",
-      ],
-    },
-    {
-      name: "Monthly",
-      price: "2,500",
-      duration: "Per Month",
-      icon: <BookOpen size={22} />,
-      color: "bg-emerald-100 text-emerald-600",
-      hoverColor: "hover:bg-emerald-100",
-      borderColor: "border-emerald-200",
-      buttonColor: "bg-emerald-600 hover:bg-emerald-700",
-      popular: true,
-      description: "Our most popular option",
-      features: ["All weekly benefits included", "Dedicated study space"],
-    },
-    {
-      name: "3 Months",
-      price: "7,000",
-      duration: "For 3 Months",
-      savePercent: "7%",
-      icon: <Star size={22} />,
-      color: "bg-amber-100 text-amber-600",
-      hoverColor: "hover:bg-amber-100",
-      borderColor: "border-amber-200",
-      buttonColor: "bg-amber-600 hover:bg-amber-700",
-      description: "Ideal for regular visitors",
-      features: [
-        "All monthly benefits included",
-        "Priority booking for study rooms",
-        "Free printing (50 pages)",
-      ],
-    },
-    {
-      name: "6 Months",
-      price: "13,500",
-      duration: "For 6 Months",
-      savePercent: "10%",
-      icon: <Award size={22} />,
-      color: "bg-rose-100 text-rose-600",
-      hoverColor: "hover:bg-rose-100",
-      borderColor: "border-rose-200",
-      buttonColor: "bg-rose-600 hover:bg-rose-700",
-      description: "Committed to your learning",
-      features: [
-        "All quarterly benefits included",
-        "Free printing (150 pages)",
-      ],
-    },
-    {
-      name: "Yearly",
-      price: "26,000",
-      duration: "Per Year",
-      savePercent: "13%",
-      icon: <Bookmark size={22} />,
-      color: "bg-indigo-100 text-indigo-600",
-      hoverColor: "hover:bg-indigo-100",
-      borderColor: "border-indigo-200",
-      buttonColor: "bg-indigo-600 hover:bg-indigo-700",
-      description: "Best value for dedicated readers",
-      features: ["All 6-month benefits included", "VIP member status"],
-    },
-  ];
 
   return (
     <div className=" px-4">
