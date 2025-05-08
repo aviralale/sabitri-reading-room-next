@@ -17,7 +17,7 @@ export default function TestimonialBadge() {
 
   return (
     <div
-      className={`absolute -bottom-16 -right-12 bg-background/80 rounded-xl p-4 shadow-lg border border-primary/30 backdrop-blur-lg max-w-xs transform hover:rotate-0 transition-all duration-300 ease-in-out z-10 ${
+      className={`absolute -bottom-20 -right-12 bg-background/80 rounded-xl p-4 shadow-lg border border-primary/30 backdrop-blur-lg max-w-xs transform hover:rotate-0 transition-all duration-300 ease-in-out z-10 ${
         isVisible ? "opacity-100 -rotate-2" : "opacity-0 rotate-0"
       }`}
     >
