@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://sabitri-reading-room-next.vercel.app"),
 
   title: {
-    default: "Sabitri Reading Room | Quiet Study Spaces for Focused Learning",
+    default: "Sabitri Reading Room | Be Educated, Be a Great Achiever",
 
     template: "%s | Sabitri Reading Room",
   },
