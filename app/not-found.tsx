@@ -61,8 +61,8 @@ export default function NotFound() {
               </h1>
 
               <p className="text-lg text-slate-600 dark:text-slate-300 mb-8">
-                The page you're looking for might have been moved, deleted, or
-                perhaps never existed. Let's get you back on track.
+                The page you&apos;re looking for might have been moved, deleted,
+                or perhaps never existed. Let&apos;s get you back on track.
               </p>
 
               <div className="space-y-4">
