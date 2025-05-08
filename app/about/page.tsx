@@ -167,7 +167,7 @@ export default function AboutPage() {
             <div className="relative z-10 max-w-xl text-center md:text-left md:w-1/2">
               <div className="inline-flex items-center rounded-full border border-blue-600/20 backdrop-blur-sm px-4 py-1.5 text-sm font-medium shadow-md animate-fadeIn">
                 <span className="bg-gradient-to-r from-blue-600 to-pink-500/80 bg-clip-text text-transparent font-semibold">
-                  Est. 2025 | Where Focus Flourishes
+                  Est. Aug. 2020 | Where Focus Flourishes
                 </span>
               </div>
 
@@ -356,7 +356,7 @@ export default function AboutPage() {
                 <div className="mt-4 flex items-center justify-between text-muted-foreground text-sm relative z-10">
                   <span className="flex items-center">
                     <BookmarkIcon className="h-4 w-4 mr-1 text-purple-600" />
-                    Founded 2025
+                    Founded Aug. 2020
                   </span>
                   <span className="flex items-center">
                     <Users className="h-4 w-4 mr-1 text-purple-600" />

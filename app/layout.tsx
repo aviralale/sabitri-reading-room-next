@@ -16,24 +16,147 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sabitri Reading Room",
+  metadataBase: new URL("https://sabitri-reading-room-next.vercel.app"),
+
+  title: {
+    default: "Sabitri Reading Room | Quiet Study Spaces for Focused Learning",
+
+    template: "%s | Sabitri Reading Room",
+  },
+
   description:
-    "Dedicated personal study spaces designed for uninterrupted learning",
+    "Discover Sabitri Reading Room's premium study spaces designed for uninterrupted learning. Quiet reading areas with comfortable seating and peaceful environment.",
+
+  keywords: [
+    "study space",
+
+    "reading room",
+
+    "quiet study",
+
+    "learning environment",
+
+    "focused study",
+
+    "library",
+
+    "academic workspace",
+
+    "student study center",
+
+    "productivity space",
+
+    "silent reading area",
+  ],
+
+  authors: [
+    {
+      name: "Sabitri Reading Room",
+
+      url: "https://sabitri-reading-room-next.vercel.app/about",
+    },
+  ],
+
+  creator: "Sabitri Reading Room",
+
+  publisher: "Sabitri Reading Room",
+
+  alternates: {
+    canonical: "/",
+  },
+
+  category: "education",
+
+  robots: {
+    index: true,
+
+    follow: true,
+
+    nocache: false,
+
+    googleBot: {
+      index: true,
+
+      follow: true,
+
+      noimageindex: false,
+
+      "max-video-preview": -1,
+
+      "max-image-preview": "large",
+
+      "max-snippet": -1,
+    },
+  },
+
+  openGraph: {
+    type: "website",
+
+    locale: "en_US",
+
+    url: "https://sabitri-reading-room-next.vercel.app",
+
+    title: "Sabitri Reading Room | Be Educated, Be a Great Achiever",
+
+    description:
+      "Premium study spaces designed for uninterrupted learning with comfortable seating and peaceful environment.",
+
+    siteName: "Sabitri Reading Room",
+
+    images: [
+      {
+        url: "/favicon.png",
+
+        width: 1200,
+
+        height: 630,
+
+        alt: "Sabitri Reading Room - Be Educated, Be a Great Achiever",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+
+    title: "Sabitri Reading Room | Be Educated, Be a Great Achiever",
+
+    description:
+      "Premium study spaces designed for uninterrupted learning with comfortable seating and peaceful environment.",
+
+    images: ["/favicon.png"],
+  },
+
   icons: [
     { rel: "icon", type: "image/png", url: "/favicon.png" },
+
     {
       rel: "icon",
+
       type: "image/png",
+
       sizes: "32x32",
+
       url: "/favicon.png",
     },
+
     {
       rel: "icon",
+
       type: "image/png",
+
       sizes: "16x16",
+
       url: "/favicon.png",
     },
-    { rel: "apple-touch-icon", url: "/favicon.png" },
+
+    {
+      rel: "apple-touch-icon",
+
+      sizes: "180x180",
+
+      url: "/favicon.png",
+    },
   ],
 };
 

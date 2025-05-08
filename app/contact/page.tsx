@@ -209,7 +209,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="min-h-screen flex items-center">
+    <section className="min-h-screen flex">
       <div className="mx-auto max-w-5xl px-4 lg:px-6 relative">
         {/* Decorative elements - subtle in both modes */}
         <div className="absolute -top-10 -left-10 w-40 h-40 bg-blue-300 dark:bg-blue-900 rounded-full opacity-20 blur-3xl" />

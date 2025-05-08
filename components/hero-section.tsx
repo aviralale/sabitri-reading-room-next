@@ -110,7 +110,7 @@ export default function HeroSection() {
             <div className="relative z-10 max-w-xl text-center md:text-left md:w-1/2">
               <div className="inline-flex items-center rounded-full border border-primary/20 bg-background/80 backdrop-blur-sm px-4 py-1.5 text-sm font-medium shadow-md animate-fadeIn">
                 <span className="bg-gradient-to-r from-primary to-red-500/80 bg-clip-text text-transparent font-semibold">
-                  Sabitri Reading Room | Est. 2025
+                  Sabitri Reading Room | Est. Aug. 2020
                 </span>
               </div>
 
