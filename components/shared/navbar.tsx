@@ -143,7 +143,7 @@ const Navbar = () => {
                   asChild
                   className="bg-gradient-to-r from-red-500 to-blue-500 font-medium text-white shadow-md transition-all hover:from-red-600 hover:to-blue-600 hover:shadow-lg dark:shadow-blue-500/20"
                 >
-                  <Link href="#membership" onClick={closeMenu}>
+                  <Link href="/membership" onClick={closeMenu}>
                     Book Now
                   </Link>
                 </Button>
